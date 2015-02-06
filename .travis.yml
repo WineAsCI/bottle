@@ -1,10 +1,14 @@
 language: python
 python: 2.7
 env:
+  - WINEENV=py26
   - WINEENV=py27
+  - WINEENV=py33
+  - WINEENV=py34
+  - WINEENV=pypy
 before_install:
   - git clone https://github.com/WineAsCI/python-lib-template.git
   - python-lib-template/.travis-setup.sh
 install:
-  - /opt/wine-staging/bin/wine 'C:\Python27\Scripts\pip.exe' install mako jinja2 cherrypy diesel eventlet gevent gunicorn paste rocket tornado twisted
-script: cd bottle && /opt/wine-staging/bin/wine 'C:\Python27\Python.exe' test/testall.py
+    - python-lib-template/_pip install mako jinja2 cherrypy diesel eventlet gevent gunicorn paste rocket tornado twisted
+script: cd bottle && ../python-lib-template/_python test/testall.py
